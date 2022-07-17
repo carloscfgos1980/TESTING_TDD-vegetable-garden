@@ -17,3 +17,6 @@ console.log(price)
 //     });
 // }
 
+module.exports = {
+    getYieldForPlant, getYieldForCrop, getTotalYield
+};
