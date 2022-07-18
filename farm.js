@@ -4,15 +4,13 @@ const corn = {
 };
 
 const getYieldForPlant = (items) => {
-    const products = [items]
-        .forEach((item) => {
-            console.log(item.yield)
-        });
+    [items].forEach((item) => {
+        console.log(item.yield)
+    });
 }
-
 getYieldForPlant(corn);
 // module.exports = {
 //     getYieldForPlant
     //     //getYieldForCrop,
     //     //getTotalYield
-//};
+// };
