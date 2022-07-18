@@ -1,16 +1,15 @@
-const corn = {
-    name: "corn",
-    yield: 30,
-};
+// const corn = {
+//     name: "corn",
+//     yield: 30,
+// };
 
 const getYieldForPlant = (items) => {
     [items].forEach((item) => {
-        console.log(item.yield)
+        itemYield = item.yield;
     });
 }
-getYieldForPlant(corn);
-// module.exports = {
-//     getYieldForPlant
+module.exports = {
+    getYieldForPlant
     //     //getYieldForCrop,
     //     //getTotalYield
-// };
+};

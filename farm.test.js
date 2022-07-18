@@ -1,10 +1,13 @@
-const { getYieldForPlant, getYieldForCrop, getTotalYield } = require("./farm");
+const { getYieldForPlant
+    //, getYieldForCrop, 
+    //getTotalYield 
+} = require("./farm");
 
 describe("getYieldForPlant", () => {
-    // const corn = {
-    //     name: "corn",
-    //     yield: 30,
-    // };
+    const corn = {
+        name: "corn",
+        yield: 30,
+    };
 
     test("Get yield for plant with no environment factors", () => {
         expect(getYieldForPlant(corn)).toBe(30);
