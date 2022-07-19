@@ -1,11 +1,3 @@
-// const corn = {
-//     name: "corn",
-//     yield: 3,
-// };
-// const input = {
-//     crop: corn,
-//     numCrops: 10,
-// };
 
 const getYieldForPlant = (items) => {
     [items].forEach((item) => {
