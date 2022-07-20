@@ -1,3 +1,18 @@
+const corn = {
+    name: "corn",
+    yield: 3,
+};
+const pumpkin = {
+    name: "pumpkin",
+    yield: 4,
+};
+const crops = [
+    { crop: corn, numCrops: 5 },
+    { crop: pumpkin, numCrops: 2 },
+];
+
+
+
 
 const getYieldForPlant = (items) => {
     [items].forEach((item) => {
@@ -6,7 +21,6 @@ const getYieldForPlant = (items) => {
     });
     return itemYield;
 }
-
 //getYieldForPlant(corn);
 
 const getYieldForCrop = (items) => {
@@ -29,18 +43,56 @@ const getYieldForCrop = (items) => {
     }
 
     const cornYield = getYieldForPlant2(items);
+    console.log("corn Yielded:", cornYield)
 
     const cornCropYield = cornYield * cornCrop;
     console.log("the amount of crop yielded is:", cornCropYield);
     return cornCropYield
 
 }
-
 //getYieldForCrop(input);
 
 
-module.exports = {
-    getYieldForPlant,
-    getYieldForCrop
-    //,getTotalYield
-};
+
+const getTotalYield = (items) => {
+
+    const getYieldForCropCorn = (items) => {
+        const cropCorn = items.filter(item => item.crop === corn);
+        //console.log(cropCorn);
+
+        const cornNums = (items) => {
+            items.forEach((item) => {
+                const cornAmount = item.numCrops;
+                console.log("Amount of corn:", cornAmount);
+                return cornAmount;
+            });
+
+        }
+        const cornNum = cornNums(cropCorn);
+        console.log(cornNum) //check why I get undefinied
+
+        const cornYield = (items) => {
+            items.forEach((item) => {
+                const cornReady = item.crop.yield;
+                console.log("Yield of corn:", cornReady);
+            });
+            return cornReady;
+        }
+
+        const cornYielded = cornYield(cropCorn);
+
+        console.log(cornYielded) //check why I get undefinied
+
+    }
+
+    getYieldForCropCorn(crops);
+
+}
+
+
+getTotalYield(crops);
+// module.exports = {
+//     getYieldForPlant,
+//     getYieldForCrop
+//     //,getTotalYield
+// };
