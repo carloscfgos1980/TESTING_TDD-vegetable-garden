@@ -1,3 +1,4 @@
+
 const corn = {
     name: "corn",
     yield: 3,
@@ -10,9 +11,6 @@ const crops = [
     { crop: corn, numCrops: 5 },
     { crop: pumpkin, numCrops: 2 },
 ];
-
-
-
 
 const getYieldForPlant = (items) => {
     [items].forEach((item) => {
@@ -57,52 +55,47 @@ const getYieldForCrop = (items) => {
 const getTotalYield = (items) => {
 
     let cornTotal = '';
-    const getYieldForCropCorn = (items) => {
-        const array = items.filter(item => item.crop === corn);
 
-        let cornAmount = '';
-        array.forEach((item) => {
-            cornAmount = item.numCrops;
-        });
+    const arraycorn = items.filter(item => item.crop == corn);
+    //const arraycorn = items[0];
 
-        let cornYield = '';
-        array.forEach((item) => {
-            cornYield = item.crop.yield;
-        });
+    let cornAmount = '';
+    arraycorn.forEach((item) => {
+        cornAmount = item.numCrops;
+    });
 
-        cornTotal = cornAmount * cornYield;
-    }
-    getYieldForCropCorn(crops);
-    //console.log("Total corn is:", cornTotal)
+    let cornYield = '';
+    arraycorn.forEach((item) => {
+        cornYield = item.crop.yield;
+    });
+
+    cornTotal = cornAmount * cornYield;
+
 
     let pumpkinTotal = '';
-    const getYieldForCropPumpkin = (items) => {
+    const arrayPunkin = items.filter(item => item.crop == pumpkin);
 
-        const array = items.filter(item => item.crop === pumpkin);
+    let pumpkinAmount = '';
+    arrayPunkin.forEach((item) => {
+        pumpkinAmount = item.numCrops;
+    });
 
-        let pumpkinAmount = '';
-        array.forEach((item) => {
-            pumpkinAmount = item.numCrops;
-        });
+    let pumpkinYield = '';
+    arrayPunkin.forEach((item) => {
+        pumpkinYield = item.crop.yield;
+    });
 
-        let pumpkinYield = '';
-        array.forEach((item) => {
-            pumpkinYield = item.crop.yield;
-        });
+    pumpkinTotal = pumpkinAmount * pumpkinYield;
 
-        pumpkinTotal = pumpkinAmount * pumpkinYield;
-    }
-    getYieldForCropPumpkin(crops);
-    //console.log("Total pumpkin is:", pumpkinTotal)
 
     const totalYield = cornTotal + pumpkinTotal;
     console.log("total yield is:", totalYield)
     return totalYield;
 
 }
-getTotalYield({ crops });
+getTotalYield(crops);
 // module.exports = {
 //     getYieldForPlant,
-//     getYieldForCrop
-//     //,getTotalYield
+//     getYieldForCrop,
+//     getTotalYield
 // };
