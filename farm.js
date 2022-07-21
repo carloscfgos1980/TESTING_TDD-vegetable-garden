@@ -60,29 +60,26 @@ const getTotalYield = (items) => {
         const cropCorn = items.filter(item => item.crop === corn);
         //console.log(cropCorn);
 
-        const cornNums = (items) => {
-            items.forEach((item) => {
-                const cornAmount = item.numCrops;
-                console.log("Amount of corn:", cornAmount);
-                return cornAmount;
-            });
+        let cornAmount = '';
+        cropCorn.forEach((item) => {
+            cornAmount = item.numCrops;
+            //console.log("Amount of corn:", cornAmount);
+            return cornAmount;
+        });
 
-        }
-        const cornNum = cornNums(cropCorn);
-        console.log(cornNum) //check why I get undefinied
+        //console.log("result of forEach of corn amount:", cornAmount)
 
-        const cornYield = (items) => {
-            items.forEach((item) => {
-                const cornReady = item.crop.yield;
-                console.log("Yield of corn:", cornReady);
-            });
-            return cornReady;
-        }
+        let cornYield = '';
+        cropCorn.forEach((item) => {
+            cornYield = item.crop.yield;
+            //console.log("Yield of corn:", cornYield);
+            return cornYield
+        });
 
-        const cornYielded = cornYield(cropCorn);
+        //console.log("result of forEach for corn yield:", cornYield)
 
-        console.log(cornYielded) //check why I get undefinied
-
+        const cornTotal = cornAmount * cornYield;
+        console.log(cornTotal);
     }
 
     getYieldForCropCorn(crops);
