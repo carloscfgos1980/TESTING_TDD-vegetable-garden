@@ -54,9 +54,11 @@ const getYieldForCrop = (items) => {
 
 const getTotalYield = (items) => {
 
+    //console.log([items])
+
     let cornTotal = '';
 
-    const arraycorn = items.filter(item => item.crop == corn);
+    const arraycorn = items.filter(item => item.numCrops === 5);
     //const arraycorn = items[0];
 
     let cornAmount = '';
@@ -73,7 +75,7 @@ const getTotalYield = (items) => {
 
 
     let pumpkinTotal = '';
-    const arrayPunkin = items.filter(item => item.crop == pumpkin);
+    const arrayPunkin = items.filter(item => item.numCrops === 2);
 
     let pumpkinAmount = '';
     arrayPunkin.forEach((item) => {
