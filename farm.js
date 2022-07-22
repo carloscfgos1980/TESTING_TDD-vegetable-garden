@@ -1,18 +1,7 @@
 
-const corn = {
-    name: "corn",
-    yield: 3,
-};
-const pumpkin = {
-    name: "pumpkin",
-    yield: 4,
-};
-const crops = [
-    { crop: corn, numCrops: 5 },
-    { crop: pumpkin, numCrops: 2 },
-];
 
 const getYieldForPlant = (items) => {
+    // In this case Items (corn) is not an array so I turn into an array by adding []
     [items].forEach((item) => {
         itemYield = item.yield;
         console.log("itemYield value:", itemYield);
@@ -22,11 +11,10 @@ const getYieldForPlant = (items) => {
 //getYieldForPlant(corn);
 
 const getYieldForCrop = (items) => {
-
+    // This method worked in order to grab the value inside the function but when I tried it later, it didn't work... no fucking clue what I was doing wrong. I found another method to do it.
     const cornAmount = (items) => {
         [items].forEach((item) => {
             cornsss = item.numCrops;
-            console.log("Amount of corn crops:", cornsss);
         });
         return cornsss;
     };
@@ -35,16 +23,13 @@ const getYieldForCrop = (items) => {
     const getYieldForPlant2 = (items) => {
         [items].forEach((item) => {
             itemYield = item.crop.yield;
-            console.log("itemYield value:", itemYield);
         });
         return itemYield;
     }
 
     const cornYield = getYieldForPlant2(items);
-    console.log("corn Yielded:", cornYield)
 
     const cornCropYield = cornYield * cornCrop;
-    console.log("the amount of crop yielded is:", cornCropYield);
     return cornCropYield
 
 }
@@ -54,50 +39,56 @@ const getYieldForCrop = (items) => {
 
 const getTotalYield = (items) => {
 
-    //console.log([items])
+    const arrayItems = Object.values(items);//In this case items take this value {crops} which is an object and we have to turn into an array with this method
 
-    let cornTotal = '';
+    let cornTotal = '';//to grab the value of a variable inside a function
 
-    const arraycorn = items.filter(item => item.numCrops === 5);
-    //const arraycorn = items[0];
+    console.log(arrayItems[0]);// since we have to array, I use [0] to grab the first array which is the one I need
 
+    const arrayCorn = arrayItems[0].filter(item => item.crop.name === 'corn');// filter and get a new array with the elements that I need
+
+    //get corn amount 
     let cornAmount = '';
-    arraycorn.forEach((item) => {
+    arrayCorn.forEach((item) => {
         cornAmount = item.numCrops;
     });
 
+    //get corn yield
     let cornYield = '';
-    arraycorn.forEach((item) => {
+    arrayCorn.forEach((item) => {
         cornYield = item.crop.yield;
     });
 
-    cornTotal = cornAmount * cornYield;
+    cornTotal = cornAmount * cornYield; //get the productivity of corn
 
 
     let pumpkinTotal = '';
-    const arrayPunkin = items.filter(item => item.numCrops === 2);
+    const arrayPumkin = arrayItems[0].filter(item => item.crop.name === 'pumpkin');
 
+    //get pumkin amount 
     let pumpkinAmount = '';
-    arrayPunkin.forEach((item) => {
+    arrayPumkin.forEach((item) => {
         pumpkinAmount = item.numCrops;
     });
 
+    //get pumkin yield
     let pumpkinYield = '';
-    arrayPunkin.forEach((item) => {
+    arrayPumkin.forEach((item) => {
         pumpkinYield = item.crop.yield;
     });
 
-    pumpkinTotal = pumpkinAmount * pumpkinYield;
+    pumpkinTotal = pumpkinAmount * pumpkinYield; //get the productivity of pumking
 
-
-    const totalYield = cornTotal + pumpkinTotal;
+    const totalYield = cornTotal + pumpkinTotal; //Total productivity
     console.log("total yield is:", totalYield)
     return totalYield;
 
 }
-getTotalYield(crops);
-// module.exports = {
-//     getYieldForPlant,
-//     getYieldForCrop,
-//     getTotalYield
-// };
+//getTotalYield({ crops });
+
+
+module.exports = {
+    getYieldForPlant,
+    getYieldForCrop,
+    getTotalYield
+};
