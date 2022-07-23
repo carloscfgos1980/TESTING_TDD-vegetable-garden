@@ -1,4 +1,4 @@
-const { getCostsForCrop, getRevenueForCrop, getProfitForCrop
+const { getCostsForCrop, getRevenueForCrop, getProfitForCrop, getTotalProfit
 } = require("./farm2");
 
 describe("getCostsForCrop", () => {
@@ -50,30 +50,31 @@ describe("getProfitForCrop", () => {
     });
 });
 
-// describe("getTotalYield", () => {
-//     test("Calculate total yield with multiple crops", () => {
-//         const banana = {
-//             name: "banana",
-//             yield: 2,
-//             cost: 3,
-//             price: 5,
-//         };
-//         const corn = {
-//             name: "corn",
-//             yield: 3,
-//             cost: 2,
-//             price: 3,
-//         };
-//         const pumpkin = {
-//             name: "pumpkin",
-//             yield: 4,
-//             cost: 1,
-//             price: 1.5,
-//         };
-//         const crops = [
-//             { crop: corn, numCrops: 5 },
-//             { crop: pumpkin, numCrops: 2 },
-//         ];
-//         expect(getTotalYield({ crops })).toBe(23);
-//     });
-// });
+describe("getTotalProfit", () => {
+    test("Calculate total profit of Banana, Corn and Pumpkin", () => {
+        const banana = {
+            name: "banana",
+            yield: 2,
+            cost: 3,
+            price: 5,
+        };
+        const corn = {
+            name: "corn",
+            yield: 3,
+            cost: 2,
+            price: 3,
+        };
+        const pumpkin = {
+            name: "pumpkin",
+            yield: 4,
+            cost: 1,
+            price: 1.5,
+        };
+        const crops = [
+            { crop: banana, numCrops: 20 },
+            { crop: corn, numCrops: 50 },
+            { crop: pumpkin, numCrops: 20 },
+        ];
+        expect(getTotalProfit({ crops })).toBe(590);
+    });
+});
