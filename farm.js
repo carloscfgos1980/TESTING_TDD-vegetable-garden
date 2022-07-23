@@ -1,15 +1,4 @@
-// const corn = {
-//     name: "corn",
-//     yield: 3,
-// };
-// const pumpkin = {
-//     name: "pumpkin",
-//     yield: 4,
-// };
-// const crops = [
-//     { crop: corn, numCrops: 5 },
-//     { crop: pumpkin, numCrops: 2 },
-// ];
+
 
 const getYieldForPlant = (items) => {
     // In this case Items (corn) is not an array so I turn into an array by adding []
