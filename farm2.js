@@ -106,6 +106,7 @@ const getTotalProfit = (items) => {
 }
 
 //getTotalProfit({ crops })
+
 module.exports = {
     getCostsForCrop,
     getRevenueForCrop,
