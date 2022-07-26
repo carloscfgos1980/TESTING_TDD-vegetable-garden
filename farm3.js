@@ -1,11 +1,13 @@
-// const avocado = {
-//     name: "avocado",
-//     yield: 30,
+// const banana = {
+//     name: "banana",
+//     yield: 2,
+//     cost: 3,
+//     price: 5,
 //     factor: {
 //         sun: {
-//             low: -50,
+//             low: -20,
 //             medium: 0,
-//             high: 50,
+//             high: 20,
 //         },
 //         wind: {
 //             low: 0,
@@ -14,44 +16,10 @@
 //         },
 //     },
 // };
-// const banana = {
-//     name: "banana",
-//     yield: 10,
-//     factor: {
-//         sun: {
-//             low: -20,
-//             medium: 0,
-//             high: 20,
-//         },
-//         wind: {
-//             low: 0,
-//             medium: -10,
-//             high: -20,
-//         },
-//     },
+// const input = {
+//     crop: banana,
+//     numCrops: 50,
 // };
-// const corn = {
-//     name: "corn",
-//     yield: 4,
-//     factor: {
-//         sun: {
-//             low: -20,
-//             medium: 0,
-//             high: 20,
-//         },
-//         wind: {
-//             low: 0,
-//             medium: 0,
-//             high: 0,
-//         },
-//     },
-// };
-// const crops = [
-//     { crop: avocado, numCrops: 20 },
-//     { crop: banana, numCrops: 50 },
-//     { crop: corn, numCrops: 20 },
-// ];
-
 const getYieldForPlantEF = (items) => {
     itemYield = '';
     eFactor = '';
@@ -71,6 +39,7 @@ const getYieldForPlantEF = (items) => {
 //getYieldForPlantEF(corn);
 
 const getYieldForPlantEFs = (items) => {
+
     itemYield = '';
     eFactor1 = '';
     eFactor2 = '';
@@ -102,7 +71,7 @@ const getTotalYieldEFs = (items) => {
 
         const arraySelect = arrayItems[0].filter(item => item.crop.name === item1);
         console.log(arraySelect)
-        itemYield = '';
+        //itemYield = '';
         eFactor1 = '';
         eFactor2 = '';
 
@@ -123,9 +92,9 @@ const getTotalYieldEFs = (items) => {
             console.log("Product yield with hig sun & medium wind is:", itemYieldEFs);
             return itemYieldEFs
         });
-        environmentFactors(eFactor1, eFactor2);
+        const cropYield = environmentFactors(eFactor1, eFactor2);
 
-        return itemYieldEFs;
+        return cropYield;
 
 
     }
@@ -151,8 +120,53 @@ const getTotalYieldEFs = (items) => {
 
 //getTotalYieldEFs({ crops });
 
+const getRevenueForCropEFs = (items) => {
+    console.log(items)
+    const yieldEF = (items) => {
+        itemYield = '';
+        eFactor1 = '';
+        eFactor2 = '';
+        [items].forEach((item) => {
+            itemYield = item.crop.yield;
+            console.log("Item yield without EF:", itemYield)
+            eFactor1 = item.crop.factor.sun.high;
+            eFactor2 = item.crop.factor.wind.medium;
+            console.log("itemYield value:", itemYield);
+            console.log("Environment Factor(hig sun):", eFactor1);
+            console.log("Environment Factor(medium wind):", eFactor2);
+        })
+        eFactorPercent1 = (100 - eFactor1) / 100;
+        console.log("Percent high sun is:", eFactorPercent1);
+
+        eFactorPercent2 = (100 - eFactor2) / 100;
+        console.log("Percent medium wind is:", eFactorPercent2);
+        //Get the factor in percent
+        itemYieldEF = itemYield * eFactorPercent1 * eFactorPercent2;
+        console.log("Product yield with hig sun & medium wind is:", itemYieldEF);
+        return itemYieldEF
+    }
+    const yieldEFs = yieldEF(items);
+
+    price = '';
+    amount = '';
+    [items].forEach((item) => {
+        price = item.crop.price;
+        console.log("Item price:", price)
+        amount = item.numCrops;
+        console.log("Item amount:", amount)
+    });
+
+    revenue = yieldEFs * amount * price
+    console.log("Item revenue with EF is:", revenue)
+    return revenue
+}
+//getRevenueForCropEFs(input);
+
 module.exports = {
     getYieldForPlantEF,
     getYieldForPlantEFs,
-    getTotalYieldEFs
+    getTotalYieldEFs,
+    getRevenueForCropEFs
+    //getProfitForCrop
+    //getTotalProfit
 };

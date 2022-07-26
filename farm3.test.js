@@ -1,4 +1,4 @@
-const { getYieldForPlantEF, getYieldForPlantEFs, getTotalYieldEFs
+const { getYieldForPlantEF, getYieldForPlantEFs, getTotalYieldEFs, getRevenueForCropEFs
 } = require("./farm3");
 
 describe("getYieldForPlantEF", () => {
@@ -106,7 +106,35 @@ describe("getTotalYieldEFs", () => {
         { crop: corn, numCrops: 20 },
     ];
     output = [{ "yieldAvocado": 18, "yieldBanana": 8.8, "yieldCorn": 3.2 }]
-    test("Get the cost for corn", () => {
+    test("Get yield with severral environmental factors", () => {
         expect(getTotalYieldEFs({ crops })).toStrictEqual(output);
+    });
+});
+
+describe("getRevenueForCropEFs", () => {
+    test("Get money obtein for the banana crop considering environmental factors", () => {
+        const banana = {
+            name: "banana",
+            yield: 2,
+            cost: 3,
+            price: 5,
+            factor: {
+                sun: {
+                    low: -20,
+                    medium: 0,
+                    high: 20,
+                },
+                wind: {
+                    low: 0,
+                    medium: -20,
+                    high: -40,
+                },
+            },
+        };
+        const input = {
+            crop: banana,
+            numCrops: 50,
+        };
+        expect(getRevenueForCropEFs(input)).toBe(480);
     });
 });
