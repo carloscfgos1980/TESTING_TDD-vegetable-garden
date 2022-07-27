@@ -1,6 +1,4 @@
 
-
-
 const getCostsForCrop = (items) => {
     const getCostItem = (items) => {
         [items].forEach((item) => {

@@ -1,4 +1,4 @@
-const { getYieldForPlantEF, getYieldForPlantEFs, getTotalYieldEFs, getRevenueForCropEFs
+const { getYieldForPlantEF, getYieldForPlantEFs, getTotalYieldEFs, getRevenueForCropEFs, getProfitForCropEFs
 } = require("./farm3");
 
 describe("getYieldForPlantEF", () => {
@@ -136,5 +136,33 @@ describe("getRevenueForCropEFs", () => {
             numCrops: 50,
         };
         expect(getRevenueForCropEFs(input)).toBe(480);
+    });
+});
+
+describe("getProfitForCropEFs", () => {
+    test("Get profit of banana crop with environmental factors", () => {
+        const banana = {
+            name: "banana",
+            yield: 2,
+            cost: 3,
+            price: 5,
+            factor: {
+                sun: {
+                    low: -20,
+                    medium: 0,
+                    high: 20,
+                },
+                wind: {
+                    low: 0,
+                    medium: -20,
+                    high: -40,
+                },
+            },
+        };
+        const input = {
+            crop: banana,
+            numCrops: 50,
+        };
+        expect(getProfitForCropEFs(input)).toBe(230);
     });
 });

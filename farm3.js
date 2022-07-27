@@ -1,25 +1,4 @@
-// const banana = {
-//     name: "banana",
-//     yield: 2,
-//     cost: 3,
-//     price: 5,
-//     factor: {
-//         sun: {
-//             low: -20,
-//             medium: 0,
-//             high: 20,
-//         },
-//         wind: {
-//             low: 0,
-//             medium: -20,
-//             high: -40,
-//         },
-//     },
-// };
-// const input = {
-//     crop: banana,
-//     numCrops: 50,
-// };
+
 const getYieldForPlantEF = (items) => {
     itemYield = '';
     eFactor = '';
@@ -162,11 +141,40 @@ const getRevenueForCropEFs = (items) => {
 }
 //getRevenueForCropEFs(input);
 
+
+const getProfitForCropEFs = (items) => {
+
+    const cropRevenue = getRevenueForCropEFs(items);
+
+    const getCostCropEFs = (items) => {
+        cost = '';
+        amount = '';
+        [items].forEach((item) => {
+            cost = item.crop.cost;
+            console.log("Item cost:", cost)
+            amount = item.numCrops;
+            console.log("Item amount:", amount)
+        });
+        totalCost = amount * price
+        console.log("The cost of growing this crop with EF is:", totalCost)
+        return totalCost
+    }
+    const cropCost = getCostCropEFs(items);
+
+    cropProfit = cropRevenue - cropCost
+
+    console.log("The profit of the crop is:", cropProfit)
+
+    return cropProfit
+
+}
+
+//getProfitForCropEFs(input);
 module.exports = {
     getYieldForPlantEF,
     getYieldForPlantEFs,
     getTotalYieldEFs,
-    getRevenueForCropEFs
-    //getProfitForCrop
+    getRevenueForCropEFs,
+    getProfitForCropEFs
     //getTotalProfit
 };
