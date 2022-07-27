@@ -64,9 +64,9 @@ const getTotalYieldEFs = (items) => {
         });
         const environmentFactors = ((factor1, factor2) => {
             eFactorPercent1 = (100 - factor1) / 100;
-            console.log("PErcent Environment Factor(hig sun):", eFactorPercent1);
+            console.log("Percent Environment Factor(hig sun):", eFactorPercent1);
             eFactorPercent2 = (100 - factor2) / 100;
-            console.log("PErcent Environment Factor(medium wind):", eFactorPercent2);
+            console.log("Percent Environment Factor(medium wind):", eFactorPercent2);
             itemYieldEFs = itemYield * eFactorPercent1 * eFactorPercent2;
             console.log("Product yield with hig sun & medium wind is:", itemYieldEFs);
             return itemYieldEFs
@@ -170,11 +170,72 @@ const getProfitForCropEFs = (items) => {
 }
 
 //getProfitForCropEFs(input);
+
+
+const getTotalProfitEFs = (items) => {
+
+    const yieldEFs = getTotalYieldEFs(items);
+    console.log(yieldEFs);
+    avocadoYield = '';
+    bananaYield = '';
+    cornYield = '';
+    yieldEFs.forEach((item) => {
+        avocadoYield = item.yieldAvocado
+        console.log("Yield of Avocado is:", avocadoYield)
+        bananaYield = item.yieldBanana
+        console.log("Yield of Banana is:", bananaYield)
+        cornYield = item.yieldCorn
+        console.log("Yield of Corn is:", cornYield)
+    })
+
+    const production = (items, item1, itemYield) => {
+
+        const arrayItems = Object.values(items); //to convert an object to an array
+
+        const arraySelect = arrayItems[0].filter(item => item.crop.name === item1);
+
+        let amount = ''; //Get the value inside the forEach  
+        let cost = '';
+        let price = '';
+        arraySelect.forEach((item) => {
+            amount = item.numCrops;
+            console.log("amount is:", amount)
+            cost = item.crop.cost;
+            console.log("cost is:", cost)
+            price = item.crop.price;
+            console.log("price is:", price)
+        });
+        console.log("yield of the item is:", itemYield)
+        cropRevenue = itemYield * amount * price
+        console.log("The total revenue of the crops is", cropRevenue)
+        cropCost = amount * cost
+        console.log("The total cost of the crops is", cropCost)
+
+        Total = cropRevenue - cropCost
+        console.log("profit of the item del producto:", Total)
+        return Total
+
+    }
+    const totalPumpkin = production(items, 'avocado', avocadoYield);
+
+    const totalBanana = production(items, 'banana', bananaYield);
+
+    const totalCorn = production(items, 'corn', cornYield);
+
+    totalCrop = totalCorn + totalPumpkin + totalBanana;
+
+    console.log("The profit for all the crops are:", totalCrop)
+
+    return totalCrop
+}
+
+//getTotalProfitEFs({ crops })
+
 module.exports = {
     getYieldForPlantEF,
     getYieldForPlantEFs,
     getTotalYieldEFs,
     getRevenueForCropEFs,
-    getProfitForCropEFs
-    //getTotalProfit
+    getProfitForCropEFs,
+    getTotalProfitEFs
 };
