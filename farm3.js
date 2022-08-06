@@ -231,11 +231,11 @@ const getTotalProfitEFs = (items) => {
 
 //getTotalProfitEFs({ crops })
 
-module.exports = {
-    getYieldForPlantEF,
-    getYieldForPlantEFs,
-    getTotalYieldEFs,
-    getRevenueForCropEFs,
-    getProfitForCropEFs,
-    getTotalProfitEFs
-};
+// module.exports = {
+//     getYieldForPlantEF,
+//     getYieldForPlantEFs,
+//     getTotalYieldEFs,
+//     getRevenueForCropEFs,
+//     getProfitForCropEFs,
+//     getTotalProfitEFs
+// };

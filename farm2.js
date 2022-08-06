@@ -57,9 +57,9 @@ const getRevenueForCrop = (items) => {
 const getProfitForCrop = (items) => {
     const itemRevenue = getRevenueForCrop(items);
     const itemCost = getCostsForCrop(items);
-    console.log("Cost of growing banana is:", itemCost)
+    //console.log("Cost of growing banana is:", itemCost)
     itemProfit = itemRevenue - itemCost
-    console.log("The profit of the banana crop is", itemProfit)
+    //console.log("The profit of the banana crop is", itemProfit)
     return itemProfit
 }
 //getProfitForCrop(input);
@@ -105,9 +105,9 @@ const getTotalProfit = (items) => {
 
 //getTotalProfit({ crops })
 
-module.exports = {
-    getCostsForCrop,
-    getRevenueForCrop,
-    getProfitForCrop,
-    getTotalProfit
-};
+// module.exports = {
+//     getCostsForCrop,
+//     getRevenueForCrop,
+//     getProfitForCrop,
+//     getTotalProfit
+// };
