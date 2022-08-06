@@ -1,5 +1,4 @@
 
-
 const getYieldForPlant = (items) => {
     // In this case Items (corn) is not an array so I turn into an array by adding []
     [items].forEach((item) => {
@@ -35,7 +34,6 @@ const getYieldForCrop = (items) => {
 
 }
 //getYieldForCrop(input);
-
 
 const getTotalYield = (products) => {
 
