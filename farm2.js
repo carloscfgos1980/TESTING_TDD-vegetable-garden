@@ -1,4 +1,26 @@
-
+// const banana = {
+//     name: "banana",
+//     yield: 2,
+//     cost: 3,
+//     price: 5,
+// };
+// const corn = {
+//     name: "corn",
+//     yield: 3,
+//     cost: 2,
+//     price: 3,
+// };
+// const pumpkin = {
+//     name: "pumpkin",
+//     yield: 4,
+//     cost: 1,
+//     price: 1.5,
+// };
+// const crops = [
+//     { crop: banana, numCrops: 20 },
+//     { crop: corn, numCrops: 50 },
+//     { crop: pumpkin, numCrops: 20 },
+// ];
 const getCostsForCrop = (items) => {
     const getCostItem = (items) => {
         [items].forEach((item) => {
@@ -48,7 +70,7 @@ const getRevenueForCrop = (items) => {
 
 
     cropRevenue = cropPrice * cropYield * cropAmount;
-    console.log("Revenue of Banana crop is", cropRevenue)
+    console.log("Revenue of this crop is", cropRevenue)
     return cropRevenue
 
 }
@@ -63,51 +85,107 @@ const getProfitForCrop = (items) => {
     return itemProfit
 }
 //getProfitForCrop(input);
+const getProfitForCrop1 = (items) => {
+    const getCostsForCrop1 = (items) => {
+        const getCostItem = (items) => {
+            items.forEach((item) => {
+                cost = item.crop.cost;
+            });
+            return cost;
+        }
+        const itemCost = getCostItem(items);
 
-const getTotalProfit = (items) => {
-    const production = (items, item1) => {
+        const cropNum = (items) => {
+            items.forEach((item) => {
+                amount = item.numCrops;
+            });
+            return amount;
+        };
+        const cropAmount = cropNum(items);
+        cropCost = itemCost * cropAmount
+        return cropCost
+    }
+    const getRevenueForCrop1 = (items) => {
 
-        const arrayItems = Object.values(items); //to convert an object to an array
+        const getYield = (items) => {
+            items.forEach((item) => {
+                itemYield = item.crop.yield;
+            });
+            return itemYield;
+        }
+        const cropYield = getYield(items);
 
-        const arraySelect = arrayItems[0].filter(item => item.crop.name === item1);
+        const getPrice = (items) => {
+            items.forEach((item) => {
+                price = item.crop.price;
+            });
+            return price;
+        }
+        const cropPrice = getPrice(items);
 
-        let amount = ''; //Get the value inside the forEach  
-        let itemYield = '';
-        let cost = '';
-        let price = '';
-        arraySelect.forEach((item) => {
-            amount = item.numCrops;
-            itemYield = item.crop.yield;
-            cost = item.crop.cost;
-            price = item.crop.price;
-        });
+        const cropNum = (items) => {
+            items.forEach((item) => {
+                amount = item.numCrops;
+            });
+            return amount;
+        };
+        const cropAmount = cropNum(items);
 
-        // Revenues = itemYield * amount * price
-        // Cost of growing the product = amount * cost
-        total = (itemYield * amount * price) - (amount * cost);
-        console.log("precio del producto:", total)
-        return total
+
+        cropRevenue = cropPrice * cropYield * cropAmount;
+        console.log("Revenue of this crop is", cropRevenue)
+        return cropRevenue
 
     }
+    const itemRevenue = getRevenueForCrop1(items);
+    const itemCost = getCostsForCrop1(items);
+    //console.log("Cost of growing banana is:", itemCost)
+    itemProfit = itemRevenue - itemCost
+    //console.log("The profit of the banana crop is", itemProfit)
+    return itemProfit
+}
+const getTotalProfit = (products) => {
+    const getArray = (products, item1) => {
+        const arrayItems = Object.values(products); //to convert an object to an array
+        const arraySelect = arrayItems[0].filter(el => el.crop.name === item1);
+        //console.log("Selected array:", arraySelect)
+        return arraySelect
+    }
 
-    const totalCorn = production(items, 'corn');
+    const cropBanana = getArray(products, 'banana');
 
-    const totalPumpkin = production(items, 'pumpkin');
+    const cropCorn = getArray(products, 'corn');
 
-    const totalBanana = production(items, 'banana');
+    const cropPumpkin = getArray(products, 'pumpkin');
 
-    totalCrop = totalCorn + totalPumpkin + totalBanana;
+    const profitBanana = getProfitForCrop1(cropBanana);
+    console.log("Pofit of the banana is:", profitBanana)
 
-    console.log("Produccion total es:", totalCrop)
+    const profitCorn = getProfitForCrop1(cropCorn);
+    console.log("Pofit of the Corn is:", profitCorn)
 
-    return totalCrop
+    const profitPumpkin = getProfitForCrop1(cropPumpkin);
+    console.log("Pofit of the Pumpkin is:", profitPumpkin)
+
+    result = [profitBanana, profitCorn, profitPumpkin];
+
+    console.log("Array all of profits:", result)
+
+    const totalProfit = result.reduce((total, number) => {
+        return total + number
+    }, 0)
+    console.log("All of profits:", totalProfit);
+
+    return totalProfit;
+
+
 }
 
 //getTotalProfit({ crops })
 
-// module.exports = {
-//     getCostsForCrop,
-//     getRevenueForCrop,
-//     getProfitForCrop,
-//     getTotalProfit
-// };
+module.exports = {
+    getCostsForCrop,
+    getRevenueForCrop,
+    getProfitForCrop,
+    getTotalProfit
+};

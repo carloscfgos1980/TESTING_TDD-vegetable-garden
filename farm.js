@@ -74,13 +74,10 @@ const getTotalYield = (products) => {
     const cropPumpkin = getArray(products, 'pumpkin');
 
     const yieldCorn = getYieldForCrop1(cropCorn);
-
     //console.log("Yield for corn is:", yieldCorn)
 
     const yieldPumpkin = getYieldForCrop1(cropPumpkin);
-
     //console.log("Yield for pumking is:", yieldPumpkin);
-
 
     totalYieldCRop = yieldCorn + yieldPumpkin;
     console.log("Total Yield is:", totalYieldCRop)
