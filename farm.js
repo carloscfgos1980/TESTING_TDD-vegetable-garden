@@ -1,94 +1,59 @@
 
-const getYieldForPlant = (items) => {
-    // In this case Items (corn) is not an array so I turn into an array by adding []
-    [items].forEach((item) => {
-        itemYield = item.yield;
-        //console.log("itemYield value:", itemYield);
-    });
-    return itemYield;
+const getYieldForPlant = (plant) => {
+    const plantYield = plant.yield
+    //console.log("Yield of the plant is:", plantYield)
+    return plantYield
 }
 //getYieldForPlant(corn);
 
-const getYieldForCrop = (items) => {
-    //items is an objet and I need to turn it into an array. I do that by encalaupated within []
-    const cropAmount = (items) => {
-        [items].forEach((item) => {
-            amount = item.numCrops;
-        });
-        return amount;
-    };
-    const cropNums = cropAmount(items);
+const getYieldForCrop = (item) => {
+    //console.log(item)
 
-    const getYieldForPlant1 = (items) => {
-        [items].forEach((item) => {
-            itemYield = item.crop.yield;
-        });
-        return itemYield;
-    }
+    const plant = item.crop
+    //console.log("Object plant is:", plant)
 
-    const plantYield = getYieldForPlant1(items);
+    const plantYield = getYieldForPlant(plant)
+    //console.log("Yield for plant is:", plantYield)
 
-    const totalCropYield = plantYield * cropNums;
-    console.log("Total Yield for the crop is:", totalCropYield)
-    return totalCropYield
+    const cropNums = item.numCrops
+    //console.log("The amount of plants is:", cropNums)
 
+    yieldCrop = plantYield * cropNums
+    console.log("Yield for the crop is:", yieldCrop)
+
+    return yieldCrop
 }
 //getYieldForCrop(input);
 
-const getTotalYield = (products) => {
+const getTotalYield = (items) => {
+    //console.log(items)
+    const cornCrop = items.crops[0];
+    //console.log("First crop is:", cornCrop)
 
-    const getArray = (products, item1) => {
-        const arrayItems = Object.values(products); //to convert an object to an array
-        const arraySelect = arrayItems[0].filter(el => el.crop.name === item1);
-        //console.log("Selected array:", arraySelect)
-        return arraySelect
-    }
+    const pumpkinCrop = items.crops[1];
+    //console.log("Second crop is:", pumpkinCrop)
 
-    const getYieldForCrop1 = (items) => {
-        //items is an objet and I need to turn it into an array. I do that by encalaupated within []
-        const cropAmount = (items) => {
-            items.forEach((item) => {
-                amount = item.numCrops;
-            });
-            return amount;
-        };
-        const cropNums = cropAmount(items);
+    const yieldCorn = getYieldForCrop(cornCrop);
+    //console.log("First Yield crop is:", yieldCorn)
 
-        const getYieldForPlant1 = (items) => {
-            items.forEach((item) => {
-                itemYield = item.crop.yield;
-            });
-            return itemYield;
-        }
+    const yieldPumpkin = getYieldForCrop(pumpkinCrop);
+    //console.log("Second Yield crop is:", yieldPumpkin)
 
-        const plantYield = getYieldForPlant1(items);
+    result = [yieldCorn, yieldPumpkin]
 
-        const totalCropYield = plantYield * cropNums;
-        console.log("Total Yield for the crop is:", totalCropYield)
-        return totalCropYield
+    const totalYield = result.reduce((total, number) => {
+        return total + number
+    }, 0)
+    console.log("Sums of yields is:", totalYield);
 
-    }
+    return totalYield
 
-    const cropCorn = getArray(products, 'corn');
-
-    const cropPumpkin = getArray(products, 'pumpkin');
-
-    const yieldCorn = getYieldForCrop1(cropCorn);
-    //console.log("Yield for corn is:", yieldCorn)
-
-    const yieldPumpkin = getYieldForCrop1(cropPumpkin);
-    //console.log("Yield for pumking is:", yieldPumpkin);
-
-    totalYieldCRop = yieldCorn + yieldPumpkin;
-    console.log("Total Yield is:", totalYieldCRop)
-
-    return totalYieldCRop
 }
 //getTotalYield({ crops });
 
 
-module.exports = {
-    getYieldForPlant,
-    getYieldForCrop,
-    getTotalYield
-};
+// module.exports = {
+//     getYieldForPlant,
+//     getYieldForCrop,
+//     getTotalYield
+// };
