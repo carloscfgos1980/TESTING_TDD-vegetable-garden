@@ -115,16 +115,16 @@ describe("getTotalYieldEFs", () => {
 
 describe("getRevenueForCropEFs", () => {
     test("Get revenue for the banana crop considering environmental factors", () => {
-        const banana = {
-            name: "banana",
-            yield: 2,
-            cost: 3,
-            price: 5,
+        const avocado = {
+            name: "avocado",
+            yield: 30,
+            cost: 2,
+            price: 0.5,
             factor: {
                 sun: {
-                    low: -20,
+                    low: -50,
                     medium: 0,
-                    high: 20,
+                    high: 50,
                 },
                 wind: {
                     low: 0,
@@ -134,42 +134,46 @@ describe("getRevenueForCropEFs", () => {
             },
         };
         const input = {
-            crop: banana,
-            numCrops: 50,
-        };
-        expect(getRevenueForCropEFs(input)).toBe(480);
-    });
-});
-
-describe("getProfitForCropEFs", () => {
-    test("Get profit of banana crop with environmental factors", () => {
-        const banana = {
-            name: "banana",
-            yield: 2,
-            cost: 3,
-            price: 5,
-            factor: {
-                sun: {
-                    low: -20,
-                    medium: 0,
-                    high: 20,
-                },
-                wind: {
-                    low: 0,
-                    medium: -20,
-                    high: -40,
-                },
-            },
-        };
-        const input = {
-            crop: banana,
-            numCrops: 50,
+            crop: avocado,
+            numCrops: 20,
         };
         const environmentFactors = {
             sun: "high",
             wind: "medium",
         };
-        expect(getProfitForCropEFs(input)).toBe(230);
+        expect(getRevenueForCropEFs(input)).toBe(360);
+    });
+});
+
+describe("getProfitForCropEFs", () => {
+    test("Get profit of banana crop with environmental factors", () => {
+        const avocado = {
+            name: "avocado",
+            yield: 30,
+            cost: 2,
+            price: 0.5,
+            factor: {
+                sun: {
+                    low: -50,
+                    medium: 0,
+                    high: 50,
+                },
+                wind: {
+                    low: 0,
+                    medium: -20,
+                    high: -40,
+                },
+            },
+        };
+        const input = {
+            crop: avocado,
+            numCrops: 20,
+        };
+        const environmentFactors = {
+            sun: "high",
+            wind: "medium",
+        };
+        expect(getProfitForCropEFs(input)).toBe(320);
     });
 });
 
@@ -238,6 +242,6 @@ describe("getTotalProfitEFs", () => {
             sun: "high",
             wind: "medium",
         };
-        expect(getTotalProfitEFs({ crops })).toBe(2172.0000000000005);
+        expect(getTotalProfitEFs({ crops })).toBe(2948);
     });
 });

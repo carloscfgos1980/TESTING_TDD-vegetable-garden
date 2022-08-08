@@ -52,8 +52,8 @@ const getTotalYield = (items) => {
 //getTotalYield({ crops });
 
 
-// module.exports = {
-//     getYieldForPlant,
-//     getYieldForCrop,
-//     getTotalYield
-// };
+module.exports = {
+    getYieldForPlant,
+    getYieldForCrop,
+    getTotalYield
+};

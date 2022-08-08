@@ -38,15 +38,15 @@ const getProfitForCrop = (item) => {
 //getProfitForCrop(input);
 
 const getTotalProfit = (items) => {
-    console.log(items)
+    //console.log(items)
     const cropBanana = items.crops[0];
-    console.log("First crop is:", cropBanana)
+    //console.log("First crop is:", cropBanana)
 
     const cropCorn = items.crops[1];
-    console.log("Second crop is:", cropCorn)
+    //console.log("Second crop is:", cropCorn)
 
     const cropPumkin = items.crops[2];
-    console.log("Third crop is:", cropPumkin)
+    //console.log("Third crop is:", cropPumkin)
 
     const profitBanana = getProfitForCrop(cropBanana);
 
@@ -59,16 +59,16 @@ const getTotalProfit = (items) => {
     const totalProfit = result.reduce((total, number) => {
         return total + number
     }, 0)
-    console.log("Sums of yields is:", totalProfit);
+    console.log("Total profit is:", totalProfit);
 
     return totalProfit
 }
 
 //getTotalProfit({ crops })
 
-// module.exports = {
-//     getCostsForCrop,
-//     getRevenueForCrop,
-//     getProfitForCrop,
-//     getTotalProfit
-// };
+module.exports = {
+    getCostsForCrop,
+    getRevenueForCrop,
+    getProfitForCrop,
+    getTotalProfit
+};
