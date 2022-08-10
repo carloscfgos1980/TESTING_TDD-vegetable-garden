@@ -18,7 +18,7 @@ describe("getYieldForPlantEF", () => {
         const environmentFactors = {
             sun: "low",
         };
-        expect(getYieldForPlantEF(corn)).toBe(15);
+        expect(getYieldForPlantEF(corn, environmentFactors)).toBe(15);
     });
 });
 
@@ -46,7 +46,7 @@ describe("getYieldForPlantEFs", () => {
     };
 
     test("Get yield for plant with several environment factors", () => {
-        expect(getYieldForPlantEFs(avocado)).toBe(36);
+        expect(getYieldForPlantEFs(avocado, environmentFactors)).toBe(36);
     });
 });
 
@@ -109,7 +109,7 @@ describe("getTotalYieldEFs", () => {
             sun: "high",
             wind: "medium",
         };
-        expect(getTotalYieldEFs({ crops })).toBe(51.599999999999994);
+        expect(getTotalYieldEFs({ crops }, environmentFactors)).toBe("51.60");
     });
 });
 
@@ -141,7 +141,7 @@ describe("getRevenueForCropEFs", () => {
             sun: "high",
             wind: "medium",
         };
-        expect(getRevenueForCropEFs(input)).toBe(360);
+        expect(getRevenueForCropEFs(input, environmentFactors)).toBe(360);
     });
 });
 
@@ -173,7 +173,7 @@ describe("getProfitForCropEFs", () => {
             sun: "high",
             wind: "medium",
         };
-        expect(getProfitForCropEFs(input)).toBe(320);
+        expect(getProfitForCropEFs(input), environmentFactors).toBe(320);
     });
 });
 
@@ -242,6 +242,6 @@ describe("getTotalProfitEFs", () => {
             sun: "high",
             wind: "medium",
         };
-        expect(getTotalProfitEFs({ crops })).toBe(2948);
+        expect(getTotalProfitEFs({ crops }, environmentFactors)).toBe(2948);
     });
 });

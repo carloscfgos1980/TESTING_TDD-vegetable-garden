@@ -1,70 +1,8 @@
-// const avocado = {
-//     name: "avocado",
-//     yield: 30,
-//     cost: 2,
-//     price: 0.5,
-//     factor: {
-//         sun: {
-//             low: -50,
-//             medium: 0,
-//             high: 50,
-//         },
-//         wind: {
-//             low: 0,
-//             medium: -20,
-//             high: -40,
-//         },
-//     },
-// };
-// const banana = {
-//     name: "banana",
-//     yield: 10,
-//     cost: 6,
-//     price: 5,
-//     factor: {
-//         sun: {
-//             low: -20,
-//             medium: 0,
-//             high: 20,
-//         },
-//         wind: {
-//             low: 0,
-//             medium: -10,
-//             high: -20,
-//         },
-//     },
-// };
-// const corn = {
-//     name: "corn",
-//     yield: 4,
-//     cost: 3,
-//     price: 3,
-//     factor: {
-//         sun: {
-//             low: -20,
-//             medium: 0,
-//             high: 20,
-//         },
-//         wind: {
-//             low: 0,
-//             medium: 0,
-//             high: 0,
-//         },
-//     },
-// };
-// const crops = [
-//     { crop: avocado, numCrops: 20 },
-//     { crop: banana, numCrops: 50 },
-//     { crop: corn, numCrops: 20 },
-// ];
-// const environmentFactors = {
-//     sun: "high",
-//     wind: "medium",
-// };
-
 
 const getYieldForPlantEF = (plant, eFactors) => {
-    const lowSun = plant.factor.sun[eFactors.sun];
+    const factorSun = eFactors.sun
+    console.log("Factor sun:", factorSun)
+    const lowSun = plant.factor.sun[factorSun];
     console.log("Constant low sun:", lowSun);
     const percentLowSun = (100 + lowSun) / 100
     console.log("Percent of low sun:", percentLowSun);
@@ -74,17 +12,20 @@ const getYieldForPlantEF = (plant, eFactors) => {
 
     YieldEF = percentLowSun * plantYield
     console.log("Yield of the plant with low sun:", YieldEF);
+    return YieldEF
 
 }
 //getYieldForPlantEF(corn, environmentFactors);
 
 const getYieldForPlantEFs = (plant, eFactors) => {
-    const HighSun = plant.factor.sun[eFactors.sun];
+    const factorSun = eFactors.sun
+    const factorWind = eFactors.wind
+    const HighSun = plant.factor.sun[factorSun];
     //console.log("Constant high sun:", HighSun);
     const percentHighSun = (100 + HighSun) / 100
     //console.log("Percent of high sun:", percentHighSun);
 
-    const mediumWind = plant.factor.wind[eFactors.wind];
+    const mediumWind = plant.factor.wind[factorWind];
     //console.log("Constant medium wind", mediumWind);
     const percentMediumWind = (100 + mediumWind) / 100
     //console.log("Percent of medium wind:", percentMediumWind);
@@ -99,35 +40,25 @@ const getYieldForPlantEFs = (plant, eFactors) => {
 }
 //getYieldForPlantEFs(avocado, environmentFactors);
 
-const getTotalYieldEFs = (items) => {
+const getTotalYieldEFs = (items, eFactors) => {
     //console.log(items)
-    const cropAvocado = items.crops[0].crop;
-    //console.log("First crop is:", cropAvocado)
 
-    const cropBanana = items.crops[1].crop;
-    //console.log("Second crop is:", cropBanana)
+    const cropsYield = items.crops.map((elem) => {
+        console.log(elem.crop)
+        crop = elem.crop
+        outcome = getYieldForPlantEFs(crop, eFactors)
 
-    const cropCorn = items.crops[2].crop;
-    //console.log("Third crop is:", cropCorn)
+        // console.log("Outcome Profit:", outcome)
+        return outcome
+    });
+    totalYield = cropsYield.reduce((acc, cur) => acc + cur);
+    total = totalYield.toFixed(2);
 
-    const yieldEFsAvoacado = getYieldForPlantEFs(cropAvocado, environmentFactors);
-
-    const yieldEFsBanana = getYieldForPlantEFs(cropBanana, environmentFactors);
-
-    const yieldEFsCorn = getYieldForPlantEFs(cropCorn, environmentFactors);
-
-    result = [yieldEFsAvoacado, yieldEFsBanana, yieldEFsCorn]
-
-    const totalYieldEFs = result.reduce((total, number) => {
-        return total + number
-    }, 0)
-    console.log("Sums of yields is:", totalYieldEFs)
-
-    return totalYieldEFs
-
+    console.log("Total Pfofit is", total)
+    return total
 }
 
-//getTotalYieldEFs({ crops });
+//getTotalYieldEFs({ crops }, environmentFactors);
 
 const getRevenueForCropEFs = (item, eFactors) => {
 
@@ -173,30 +104,18 @@ const getProfitForCropEFs = (item, eFactors) => {
 //getProfitForCropEFs(input, environmentFactors);
 
 
-const getTotalProfitEFs = (items) => {
+const getTotalProfitEFs = (items, eFactors) => {
     //console.log(items)
-    const cropBanana = items.crops[0];
-    //console.log("First crop is:", cropBanana)
 
-    const cropCorn = items.crops[1];
-    //console.log("Second crop is:", cropCorn)
+    const cropsYield = items.crops.map((elem) => {
+        outcome = getProfitForCropEFs(elem, eFactors)
 
-    const cropPumkin = items.crops[2];
-    //console.log("Third crop is:", cropPumkin)
+        // console.log("Outcome Profit:", outcome)
+        return outcome
+    });
+    totalProfit = cropsYield.reduce((acc, cur) => acc + cur);
 
-    const profitBanana = getProfitForCropEFs(cropBanana, environmentFactors);
-
-    const profitCorn = getProfitForCropEFs(cropCorn, environmentFactors)
-
-    const profitPumkin = getProfitForCropEFs(cropPumkin, environmentFactors)
-
-    result = [profitBanana, profitCorn, profitPumkin]
-
-    const totalProfit = result.reduce((total, number) => {
-        return total + number
-    }, 0)
-    console.log("Total profit is:", totalProfit);
-
+    console.log("Total Pfofit is", totalProfit)
     return totalProfit
 }
 
