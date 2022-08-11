@@ -1,47 +1,59 @@
-const getYieldForPlant = (plant) => {
-    console.log("yield for plant", plant)
-    const plantYield = plant.yield
-    console.log("Yield of the plant is:", plantYield)
-    return plantYield
+
+const getYieldForPlant = (plant, eFactors) => {
+    plantYield = plant.yield
+
+    if (eFactors === undefined) {
+        console.log("Yield of the plant is:", plantYield)
+        return plantYield;
+    }
+
+    calculation = (factor) => {
+        if (factor === undefined) {
+            return 1;
+        } else {
+            return (100 + factor) / 100;
+        }
+    };
+
+    const factorSun = eFactors.sun;
+    const sunny = calculation(plant.factor.sun[factorSun]);
+
+    const factorWind = eFactors.wind;
+    const windy = calculation(plant.factor.wind[factorWind]);
+
+
+
+    outcome = plantYield * sunny * windy;
+
+    console.log("Yield for plant is:", outcome)
+
+    return outcome
+
+    // const factorSun = eFactors.sun
+    // const factorWind = eFactors.wind
+    // const HighSun = plant.factor.sun[factorSun];
+    // //console.log("Constant high sun:", HighSun);
+    // const percentHighSun = (100 + HighSun) / 100
+    // //console.log("Percent of high sun:", percentHighSun);
+
+    // const mediumWind = plant.factor.wind[factorWind];
+    // //console.log("Constant medium wind", mediumWind);
+    // const percentMediumWind = (100 + mediumWind) / 100
+    // //console.log("Percent of medium wind:", percentMediumWind);
+
+    // const plantYield = plant.yield
+    // //console.log("Yield of the plant is:", plantYield)
+
+    // YieldEFs = plantYield * percentHighSun * percentMediumWind
+    // console.log("Yield of the plant with low sun and medium wind:", YieldEFs);
+
+    // return YieldEFs
 }
 //getYieldForPlant(corn);
 
-const getYieldForCrop = (item) => {
-    plant = item.crop
-    //console.log("Object plant is:", plant)
-
-    plantYield = getYieldForPlant(plant)
-    //console.log("Yield for plant is:", plantYield)
-
-    const cropNums = item.numCrops
-    //console.log("The amount of plants is:", cropNums)
-
-    yieldCrop = plantYield * cropNums
-    console.log("Yield for the crop is:", yieldCrop)
-
-    return yieldCrop;
-}
-//getYieldForCrop(input);
-
-const getTotalYield = (items) => {
-    //console.log("Items:", items.crops)
-    const cropsYield = items.crops.map((elem) => {
-        outcome = getYieldForCrop(elem)
-
-        //console.log("Outcome Yield:", outcome)
-        return outcome
-    });
-    totalYield = cropsYield.reduce((acc, cur) => acc + cur);
-
-    console.log("Total Yield is", totalYield)
-    return totalYield
-
-}
-//getTotalYield({ crops });
-
 
 module.exports = {
-    getYieldForPlant,
-    getYieldForCrop,
-    getTotalYield
+    getYieldForPlant
+    //getYieldForCrop,
+    //getTotalYield
 };
