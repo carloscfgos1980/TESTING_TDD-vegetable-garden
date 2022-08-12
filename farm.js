@@ -2,12 +2,11 @@
 const getYieldForPlant = (plant, eFactors) => {
     plantYield = plant.yield
 
-    console.log("eFactors:", eFactors)
-
     if (eFactors === undefined) {
         console.log("Yield of the plant is:", plantYield)
         return plantYield;
     }
+
     calculation = (eFactor) => {
         if (eFactor === undefined) {
             return 1;
@@ -29,9 +28,25 @@ const getYieldForPlant = (plant, eFactors) => {
 }
 //getYieldForPlant(corn, environmentFactors);
 
+const getYieldForCrop = (item) => {
+    plant = item.crop
+    //console.log("Object plant is:", plant)
+
+    plantYield = getYieldForPlant(plant)
+    //console.log("Yield for plant is:", plantYield)
+
+    const cropNums = item.numCrops
+    //console.log("The amount of plants is:", cropNums)
+
+    yieldCrop = plantYield * cropNums
+    console.log("Yield for the crop is:", yieldCrop)
+
+    return yieldCrop;
+}
+
 
 module.exports = {
-    getYieldForPlant
-    //getYieldForCrop,
+    getYieldForPlant,
+    getYieldForCrop,
     //getTotalYield
 };

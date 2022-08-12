@@ -1,5 +1,5 @@
-const { getYieldForPlant
-    //getYieldForCrop,
+const { getYieldForPlant,
+    getYieldForCrop,
     //getTotalYield
 } = require("./farm");
 
@@ -59,5 +59,35 @@ describe("getYieldForPlantEFs", () => {
             sun: "low",
         };
         expect(getYieldForPlant(corn, environmentFactors)).toBe(15);
+    });
+});
+
+describe("getYieldForCrop", () => {
+    test("Get yield for crop, simple", () => {
+        const corn = {
+            name: "corn",
+            yield: 30,
+            factor: {
+                sun: {
+                    low: -50,
+                    medium: 0,
+                    high: 50,
+                },
+                wind: {
+                    low: 0,
+                    medium: -20,
+                    high: -40,
+                },
+            },
+        };
+        const input = {
+            crop: corn,
+            numCrops: 10,
+        };
+        const environmentFactors = {
+            sun: "high",
+            wind: "medium",
+        };
+        expect(getYieldForCrop(input, environmentFactors)).toBe(300);
     });
 });
