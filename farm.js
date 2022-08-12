@@ -64,8 +64,23 @@ const getTotalYield = (items, eFactors) => {
 }
 //getTotalYield({ crops }, environmentFactors);
 
+const getCostsForCrop = (item) => {
+    price = item.crop.cost;
+    //console.log("Cost of the plant is:", price)
+
+    amount = item.numCrops;
+    //console.log("The number of plants is:", amount)
+
+    cropCost = price * amount
+    console.log("Cost of the crop is:", cropCost)
+
+    return cropCost
+}
+//getCostsForCrop(input);
+
 module.exports = {
     getYieldForPlant,
     getYieldForCrop,
-    getTotalYield
+    getTotalYield,
+    getCostsForCrop
 };

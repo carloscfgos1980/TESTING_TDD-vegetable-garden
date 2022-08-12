@@ -1,6 +1,7 @@
 const { getYieldForPlant,
     getYieldForCrop,
-    getTotalYield
+    getTotalYield,
+    getCostsForCrop
 } = require("./farm");
 
 
@@ -153,5 +154,34 @@ describe("getTotalYield", () => {
             wind: "medium",
         };
         expect(getTotalYield({ crops }, environmentFactors)).toBe("51.60");
+    });
+});
+
+describe("getCostsForCrop", () => {
+    const corn = {
+        name: "corn",
+        yield: 30,
+        price: 4,
+        cost: 6,
+        factor: {
+            sun: {
+                low: -50,
+                medium: 0,
+                high: 50,
+            },
+            wind: {
+                low: 0,
+                medium: -20,
+                high: -40,
+            },
+        },
+    };
+    const input = {
+        crop: corn,
+        numCrops: 10,
+    };
+
+    test("Get the cost for corn", () => {
+        expect(getCostsForCrop(input)).toBe(60);
     });
 });
