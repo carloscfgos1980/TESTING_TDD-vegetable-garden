@@ -43,10 +43,29 @@ const getYieldForCrop = (item) => {
 
     return yieldCrop;
 }
+//getYieldForCrop(input, environmentFactors)
 
+const getTotalYield = (items, eFactors) => {
+    //console.log(items)
+
+    const cropsYield = items.crops.map((elem) => {
+        console.log(elem.crop)
+        crop = elem.crop
+        outcome = getYieldForPlant(crop, eFactors)
+
+        // console.log("Outcome Profit:", outcome)
+        return outcome
+    });
+    totalYield = cropsYield.reduce((acc, cur) => acc + cur);
+    total = totalYield.toFixed(2);
+
+    console.log("Total Pfofit is", total)
+    return total
+}
+//getTotalYield({ crops }, environmentFactors);
 
 module.exports = {
     getYieldForPlant,
     getYieldForCrop,
-    //getTotalYield
+    getTotalYield
 };
