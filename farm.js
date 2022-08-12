@@ -30,8 +30,6 @@ const getYieldForPlant = (plant, eFactors) => {
 
 const getYieldForCrop = (item, eFactors) => {
     plant = item.crop
-    //console.log("Object plant is:", plant)
-
     plantYield = getYieldForPlant(plant, eFactors)
     //console.log("Yield for plant is:", plantYield)
 
@@ -39,20 +37,16 @@ const getYieldForCrop = (item, eFactors) => {
     //console.log("The amount of plants is:", cropNums)
 
     yieldCrop = plantYield * cropNums
-    console.log("Yield for the crop is:", yieldCrop)
-
+    console.log("Yield for the crops is:", yieldCrop)
     return yieldCrop;
 }
 //getYieldForCrop(input, environmentFactors)
 
 const getTotalYield = (items, eFactors) => {
-    //console.log(items)
-
     const cropsYield = items.crops.map((elem) => {
-        console.log(elem.crop)
+        //console.log(elem.crop)
         crop = elem.crop
         outcome = getYieldForPlant(crop, eFactors)
-
         // console.log("Outcome Profit:", outcome)
         return outcome
     });
@@ -73,7 +67,6 @@ const getCostsForCrop = (item) => {
 
     cropCost = price * amount
     console.log("Cost of the crop is:", cropCost)
-
     return cropCost
 }
 //getCostsForCrop(input);
@@ -87,16 +80,40 @@ const getRevenueForCrop = (item, eFactors) => {
 
     revenueCrop = cropYield * price
     console.log("Revenue of the crop is:", revenueCrop)
-
     return revenueCrop
 }
 //getRevenueForCrop(input, environmentFactors);
 
+const getProfitForCrop = (item, eFactors) => {
+    const cropRevenue = getRevenueForCrop(item, eFactors);
+    //console.log("Revenue of the crop is:", cropRevenue)
+    const cropCost = getCostsForCrop(item);
+    //console.log("Cost of the crop is:", cropCost)
+    cropProfit = cropRevenue - cropCost
+    console.log("The profit of the crop is", cropProfit)
+    return cropProfit
+}
+//getProfitForCrop(input, environmentFactors);
+
+const getTotalProfit = (items, eFactors) => {
+    const cropsYield = items.crops.map((elem) => {
+        outcome = getProfitForCrop(elem, eFactors)
+        // console.log("Outcome Profit:", outcome)
+        return outcome
+    });
+
+    totalProfit = cropsYield.reduce((acc, cur) => acc + cur);
+    console.log("Total Profit is", totalProfit)
+    return totalProfit
+}
+//getTotalProfitEFs({ crops }, environmentFactor)
 
 module.exports = {
     getYieldForPlant,
     getYieldForCrop,
     getTotalYield,
     getCostsForCrop,
-    getRevenueForCrop
+    getRevenueForCrop,
+    getProfitForCrop,
+    getTotalProfit
 };

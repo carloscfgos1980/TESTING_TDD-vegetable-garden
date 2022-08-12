@@ -2,7 +2,9 @@ const { getYieldForPlant,
     getYieldForCrop,
     getTotalYield,
     getCostsForCrop,
-    getRevenueForCrop
+    getRevenueForCrop,
+    getProfitForCrop,
+    getTotalProfit
 } = require("./farm");
 
 
@@ -99,6 +101,8 @@ describe("getTotalYield", () => {
         const avocado = {
             name: "avocado",
             yield: 30,
+            cost: 2,
+            price: 0.5,
             factor: {
                 sun: {
                     low: -50,
@@ -115,6 +119,8 @@ describe("getTotalYield", () => {
         const banana = {
             name: "banana",
             yield: 10,
+            cost: 6,
+            price: 5,
             factor: {
                 sun: {
                     low: -20,
@@ -131,6 +137,8 @@ describe("getTotalYield", () => {
         const corn = {
             name: "corn",
             yield: 4,
+            cost: 3,
+            price: 3,
             factor: {
                 sun: {
                     low: -20,
@@ -215,5 +223,106 @@ describe("getRevenueForCrop", () => {
             wind: "medium",
         };
         expect(getRevenueForCrop(input, environmentFactors)).toBe(1440);
+    });
+});
+
+describe("getProfitForCrop", () => {
+    test("Get profit of banana crop with environmental factors", () => {
+        const corn = {
+            name: "corn",
+            yield: 30,
+            price: 4,
+            cost: 6,
+            factor: {
+                sun: {
+                    low: -50,
+                    medium: 0,
+                    high: 50,
+                },
+                wind: {
+                    low: 0,
+                    medium: -20,
+                    high: -40,
+                },
+            },
+        };
+        const input = {
+            crop: corn,
+            numCrops: 10,
+        };
+        const environmentFactors = {
+            sun: "high",
+            wind: "medium",
+        };
+        expect(getProfitForCrop(input, environmentFactors)).toBe(1380);
+    });
+});
+
+describe("getTotalProfit", () => {
+    test("Calculate total profit of Avocado, Banana and Corn taking in account environmental factors", () => {
+        const avocado = {
+            name: "avocado",
+            yield: 30,
+            cost: 2,
+            price: 0.5,
+            factor: {
+                sun: {
+                    low: -50,
+                    medium: 0,
+                    high: 50,
+                },
+                wind: {
+                    low: 0,
+                    medium: -20,
+                    high: -40,
+                },
+            },
+        };
+        const banana = {
+            name: "banana",
+            yield: 10,
+            cost: 6,
+            price: 5,
+            factor: {
+                sun: {
+                    low: -20,
+                    medium: 0,
+                    high: 20,
+                },
+                wind: {
+                    low: 0,
+                    medium: -10,
+                    high: -20,
+                },
+            },
+        };
+        const corn = {
+            name: "corn",
+            yield: 4,
+            cost: 3,
+            price: 3,
+            factor: {
+                sun: {
+                    low: -20,
+                    medium: 0,
+                    high: 20,
+                },
+                wind: {
+                    low: 0,
+                    medium: 0,
+                    high: 0,
+                },
+            },
+        };
+        const crops = [
+            { crop: avocado, numCrops: 20 },
+            { crop: banana, numCrops: 50 },
+            { crop: corn, numCrops: 20 },
+        ];
+        const environmentFactors = {
+            sun: "high",
+            wind: "medium",
+        };
+        expect(getTotalProfit({ crops }, environmentFactors)).toBe(2948);
     });
 });
