@@ -9,7 +9,7 @@ const { getYieldForPlant,
 
 
 
-describe("getYieldForPlantEFs", () => {
+describe("getYieldForPlant", () => {
     test("Get yield for plant with several environment factors", () => {
         const corn = {
             name: "corn",
@@ -161,7 +161,7 @@ describe("getTotalYield", () => {
             sun: "high",
             wind: "medium",
         };
-        expect(getTotalYield({ crops }, environmentFactors)).toBe("51.60");
+        expect(getTotalYield({ crops }, environmentFactors)).toBe(1356);
     });
 });
 

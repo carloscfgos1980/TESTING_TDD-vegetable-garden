@@ -1,3 +1,70 @@
+const avocado = {
+    name: "avocado",
+    yield: 30,
+    cost: 2,
+    price: 0.5,
+    factor: {
+        sun: {
+            low: -50,
+            medium: 0,
+            high: 50,
+        },
+        wind: {
+            low: 0,
+            medium: -20,
+            high: -40,
+        },
+    },
+};
+const banana = {
+    name: "banana",
+    yield: 10,
+    cost: 6,
+    price: 5,
+    factor: {
+        sun: {
+            low: -20,
+            medium: 0,
+            high: 20,
+        },
+        wind: {
+            low: 0,
+            medium: -10,
+            high: -20,
+        },
+    },
+};
+const corn = {
+    name: "corn",
+    yield: 4,
+    cost: 3,
+    price: 3,
+    factor: {
+        sun: {
+            low: -20,
+            medium: 0,
+            high: 20,
+        },
+        wind: {
+            low: 0,
+            medium: 0,
+            high: 0,
+        },
+    },
+};
+const crops = [
+    { crop: avocado, numCrops: 20 },
+    { crop: banana, numCrops: 50 },
+    { crop: corn, numCrops: 20 },
+];
+const environmentFactors = {
+    sun: "high",
+    wind: "medium",
+};
+
+
+
+
 
 const getYieldForPlant = (plant, eFactors) => {
     plantYield = plant.yield
@@ -44,17 +111,14 @@ const getYieldForCrop = (item, eFactors) => {
 
 const getTotalYield = (items, eFactors) => {
     const cropsYield = items.crops.map((elem) => {
-        //console.log(elem.crop)
-        crop = elem.crop
-        outcome = getYieldForPlant(crop, eFactors)
-        // console.log("Outcome Profit:", outcome)
+        outcome = getYieldForCrop(elem, eFactors)
+        console.log("Outcome Profit:", outcome)
         return outcome
     });
     totalYield = cropsYield.reduce((acc, cur) => acc + cur);
-    total = totalYield.toFixed(2);
 
-    console.log("Total Pfofit is", total)
-    return total
+    console.log("Total Yield is", totalYield)
+    return totalYield
 }
 //getTotalYield({ crops }, environmentFactors);
 
